@@ -13,11 +13,12 @@ import MediaPipeTasksVision
 struct CameraView: View {
     @StateObject private var cameraManager = CameraManager()
     @StateObject private var poseLandmarkerService: PoseLandmarkerService
+    @EnvironmentObject var exerciseTracker: ExerciseTracker
     @ObservedObject var inferenceConfig = InferenceConfig.shared
     
     @State private var overlays: [PoseOverlay] = []
     @State private var imageSize: CGSize = .zero
-    
+    @State private var showExerciseSelection = false
     init() {
         let config = InferenceConfig.shared
         
@@ -57,6 +58,29 @@ struct CameraView: View {
                         )
                 }
                 
+                if exerciseTracker.isExerciseActive {
+                                ExerciseView(
+                                    exerciseTracker: exerciseTracker,
+                                    poseLandmarkerService: poseLandmarkerService
+                                )
+                            } else {
+                                // Exercise selection button
+                                VStack {
+                                    Spacer()
+                                    Button(action: {
+                                        showExerciseSelection = true
+                                    }) {
+                                        Text("Start Exercise")
+                                            .font(.headline)
+                                            .padding()
+                                            .background(Color.blue)
+                                            .foregroundColor(.white)
+                                            .cornerRadius(10)
+                                    }
+                                    .padding(.bottom, 100)
+                                }
+                            }
+                
                 VStack {
                     HStack {
                         Spacer()
@@ -75,6 +99,9 @@ struct CameraView: View {
                     }
                     Spacer()
                 }
+                .sheet(isPresented: $showExerciseSelection) {
+                            ExerciseSelectionView(exerciseTracker: exerciseTracker)
+                        }
             } else {
                 Color.black
                     .overlay(
@@ -86,7 +113,7 @@ struct CameraView: View {
             // Settings panel at the bottom
             VStack {
                 Spacer()
-                SettingsPanelView(poseLandmarkerService: poseLandmarkerService)
+                SettingsPanelView(poseLandmarkerService: poseLandmarkerService, exerciseTracker: exerciseTracker)
                     .padding()
                     .background(Color.black.opacity(0.7))
                     .cornerRadius(10)
@@ -193,3 +220,4 @@ extension CIContext {
         return buffer
     }
 }
+

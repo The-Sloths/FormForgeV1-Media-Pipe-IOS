@@ -14,6 +14,7 @@ import MediaPipeTasksVision
 struct MediaLibraryView: View {
     @StateObject private var poseLandmarkerService: PoseLandmarkerService
     @ObservedObject var inferenceConfig = InferenceConfig.shared
+    @EnvironmentObject var exerciseTracker: ExerciseTracker
     
     @State private var selectedItem: PhotosPickerItem?
     @State private var selectedImageData: Data?
@@ -108,7 +109,7 @@ struct MediaLibraryView: View {
             // Bottom settings panel
             VStack {
                 Spacer()
-                SettingsPanelView(poseLandmarkerService: poseLandmarkerService)
+                SettingsPanelView(poseLandmarkerService: poseLandmarkerService, exerciseTracker: exerciseTracker)
                     .padding()
                     .background(Color.black.opacity(0.7))
                     .cornerRadius(10)
