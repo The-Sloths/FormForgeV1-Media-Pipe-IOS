@@ -46,18 +46,18 @@ class WallSlideExercise: Exercise {
         let backAngle = calculateBackAngle(landmarks: poseLandmarks)
         let armAngle = calculateArmAngle(landmarks: poseLandmarks)
         
-        // Check form issues and return feedback
-        if kneeAngle < minKneeAngle {
-            return "Knees are bent too much. Don't go too low."
-        }
-        
-        if abs(backAngle - properBackAngle) > backAngleTolerance {
-            return "Keep your back straight against the wall."
-        }
-        
-        if armAngle < minArmRaiseAngle {
-            return "Raise your arms higher."
-        }
+        // Check form issues and return voice-friendly feedback
+            if kneeAngle < minKneeAngle {
+                return "Knees too bent. Stand taller."
+            }
+            
+            if abs(backAngle - properBackAngle) > backAngleTolerance {
+                return "Keep back straight against wall."
+            }
+            
+            if armAngle < minArmRaiseAngle {
+                return "Raise arms higher."
+            }
         
         return nil // No form issues
     }

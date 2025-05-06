@@ -13,7 +13,7 @@ import MediaPipeTasksVision
 struct CameraView: View {
     @StateObject private var cameraManager = CameraManager()
     @StateObject private var poseLandmarkerService: PoseLandmarkerService
-    @StateObject private var exerciseTracker = ExerciseTracker()
+    @EnvironmentObject var exerciseTracker: ExerciseTracker
     @ObservedObject var inferenceConfig = InferenceConfig.shared
     
     @State private var overlays: [PoseOverlay] = []
@@ -113,7 +113,7 @@ struct CameraView: View {
             // Settings panel at the bottom
             VStack {
                 Spacer()
-                SettingsPanelView(poseLandmarkerService: poseLandmarkerService)
+                SettingsPanelView(poseLandmarkerService: poseLandmarkerService, exerciseTracker: exerciseTracker)
                     .padding()
                     .background(Color.black.opacity(0.7))
                     .cornerRadius(10)

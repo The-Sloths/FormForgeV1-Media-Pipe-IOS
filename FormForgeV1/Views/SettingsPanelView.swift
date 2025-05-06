@@ -11,8 +11,11 @@ import MediaPipeTasksVision
 
 struct SettingsPanelView: View {
     @ObservedObject var inferenceConfig = InferenceConfig.shared
-    @ObservedObject var poseLandmarkerService: PoseLandmarkerService
-    @State private var isExpanded = false
+        @ObservedObject var poseLandmarkerService: PoseLandmarkerService
+        @State private var isExpanded = false
+        @State private var voiceFeedbackEnabled = true // Default on
+        
+        @ObservedObject var exerciseTracker: ExerciseTracker
     
     var body: some View {
         VStack(spacing: 10) {
@@ -34,6 +37,16 @@ struct SettingsPanelView: View {
             }
             
             if isExpanded {
+                Toggle(isOn: $voiceFeedbackEnabled) {
+                                    HStack {
+                                        Image(systemName: voiceFeedbackEnabled ? "speaker.wave.2.fill" : "speaker.slash.fill")
+                                        Text("Voice Feedback")
+                                    }
+                                    .foregroundColor(.white)
+                                }
+                                .onChange(of: voiceFeedbackEnabled) { enabled in
+                                    exerciseTracker.setVoiceFeedbackEnabled(enabled)
+                                }
                 // Inference time
                 if let resultBundle = poseLandmarkerService.resultBundle {
                     HStack {

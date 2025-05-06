@@ -33,7 +33,7 @@ class CameraManager: NSObject, ObservableObject {
     private var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     
     private var lastProcessingTime: Date?
-    private var minimumProcessingInterval: TimeInterval = 0.1 // Dynamic based on performance
+    private var minimumProcessingInterval: TimeInterval = 0.2 // Dynamic based on performance
     private let targetProcessingInterval: TimeInterval = 0.1 // 10 FPS target
     
     // Image size control
