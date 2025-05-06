@@ -14,7 +14,7 @@ class InferenceConfig: ObservableObject {
     static let shared = InferenceConfig()
     
     @Published var model: Model = .pose_landmarker_lite
-    @Published var delegate: PoseLandmarkerDelegate = .CPU
+    @Published var delegate: PoseLandmarkerDelegate = .GPU
     @Published var numPoses: Int = 1
     @Published var minPoseDetectionConfidence: Float = 0.5
     @Published var minPosePresenceConfidence: Float = 0.5
