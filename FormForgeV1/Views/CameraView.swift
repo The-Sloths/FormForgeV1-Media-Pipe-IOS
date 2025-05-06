@@ -13,11 +13,12 @@ import MediaPipeTasksVision
 struct CameraView: View {
     @StateObject private var cameraManager = CameraManager()
     @StateObject private var poseLandmarkerService: PoseLandmarkerService
+    @StateObject private var exerciseTracker = ExerciseTracker()
     @ObservedObject var inferenceConfig = InferenceConfig.shared
     
     @State private var overlays: [PoseOverlay] = []
     @State private var imageSize: CGSize = .zero
-    
+    @State private var showExerciseSelection = false
     init() {
         let config = InferenceConfig.shared
         
@@ -57,6 +58,29 @@ struct CameraView: View {
                         )
                 }
                 
+                if exerciseTracker.isExerciseActive {
+                                ExerciseView(
+                                    exerciseTracker: exerciseTracker,
+                                    poseLandmarkerService: poseLandmarkerService
+                                )
+                            } else {
+                                // Exercise selection button
+                                VStack {
+                                    Spacer()
+                                    Button(action: {
+                                        showExerciseSelection = true
+                                    }) {
+                                        Text("Start Exercise")
+                                            .font(.headline)
+                                            .padding()
+                                            .background(Color.blue)
+                                            .foregroundColor(.white)
+                                            .cornerRadius(10)
+                                    }
+                                    .padding(.bottom, 100)
+                                }
+                            }
+                
                 VStack {
                     HStack {
                         Spacer()
@@ -75,6 +99,9 @@ struct CameraView: View {
                     }
                     Spacer()
                 }
+                .sheet(isPresented: $showExerciseSelection) {
+                            ExerciseSelectionView(exerciseTracker: exerciseTracker)
+                        }
             } else {
                 Color.black
                     .overlay(
@@ -191,5 +218,26 @@ extension CIContext {
         CVPixelBufferUnlockBaseAddress(buffer, CVPixelBufferLockFlags(rawValue: 0))
         
         return buffer
+    }
+}
+
+struct ExerciseSelectionView: View {
+    @ObservedObject var exerciseTracker: ExerciseTracker
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        NavigationView {
+            List {
+                Button("Wall Slide - 10 reps") {
+                    exerciseTracker.startExercise(WallSlideExercise(targetReps: 10))
+                    presentationMode.wrappedValue.dismiss()
+                }
+                // Add more exercises here as you implement them
+            }
+            .navigationTitle("Select Exercise")
+            .navigationBarItems(trailing: Button("Cancel") {
+                presentationMode.wrappedValue.dismiss()
+            })
+        }
     }
 }
