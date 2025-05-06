@@ -137,26 +137,4 @@ class WallSlideExercise: Exercise {
     }
 }
 
-// Helper enum to access landmark indices
-enum PoseLandmarkerHelper {
-    enum Landmark: Int {
-        case nose = 0
-        case leftEye = 1
-        case rightEye = 2
-        case leftEar = 3
-        case rightEar = 4
-        case leftShoulder = 5
-        case rightShoulder = 6
-        case leftElbow = 7
-        case rightElbow = 8
-        case leftWrist = 9
-        case rightWrist = 10
-        case leftHip = 11
-        case rightHip = 12
-        case leftKnee = 13
-        case rightKnee = 14
-        case leftAnkle = 15
-        case rightAnkle = 16
-        // Add more as needed
-    }
-}
+

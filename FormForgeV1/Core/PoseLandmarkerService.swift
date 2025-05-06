@@ -197,3 +197,37 @@ struct ResultBundle {
     let poseLandmarkerResults: [PoseLandmarkerResult?]
     var size: CGSize = .zero
 }
+
+enum PoseLandmarkerHelper {
+    enum Landmark: Int {
+        case nose = 0
+        case leftEye = 1
+        case rightEye = 2
+        case leftEar = 3
+        case rightEar = 4
+        case leftShoulder = 5
+        case rightShoulder = 6
+        case leftElbow = 7
+        case rightElbow = 8
+        case leftWrist = 9
+        case rightWrist = 10
+        case leftHip = 11
+        case rightHip = 12
+        case leftKnee = 13
+        case rightKnee = 14
+        case leftAnkle = 15
+        case rightAnkle = 16
+    }
+    
+    // Calculate angle between three points
+    static func calculateAngle(point1: CGPoint, point2: CGPoint, point3: CGPoint) -> Float {
+        let vector1 = CGPoint(x: point1.x - point2.x, y: point1.y - point2.y)
+        let vector2 = CGPoint(x: point3.x - point2.x, y: point3.y - point2.y)
+        
+        let dot = vector1.x * vector2.x + vector1.y * vector2.y
+        let det = vector1.x * vector2.y - vector1.y * vector2.x
+        
+        let angle = atan2(det, dot)
+        return abs(Float(angle) * (180.0 / Float.pi))
+    }
+}

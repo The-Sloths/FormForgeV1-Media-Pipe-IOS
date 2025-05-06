@@ -221,23 +221,3 @@ extension CIContext {
     }
 }
 
-struct ExerciseSelectionView: View {
-    @ObservedObject var exerciseTracker: ExerciseTracker
-    @Environment(\.presentationMode) var presentationMode
-    
-    var body: some View {
-        NavigationView {
-            List {
-                Button("Wall Slide - 10 reps") {
-                    exerciseTracker.startExercise(WallSlideExercise(targetReps: 10))
-                    presentationMode.wrappedValue.dismiss()
-                }
-                // Add more exercises here as you implement them
-            }
-            .navigationTitle("Select Exercise")
-            .navigationBarItems(trailing: Button("Cancel") {
-                presentationMode.wrappedValue.dismiss()
-            })
-        }
-    }
-}
