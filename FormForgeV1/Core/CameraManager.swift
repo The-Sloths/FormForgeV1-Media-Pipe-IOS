@@ -1,3 +1,11 @@
+//
+//  CameraManager.swift
+//  FormForgeV1
+//
+//  Created by Pawel Kowalewski on 06/05/2025.
+//
+
+
 import AVFoundation
 import SwiftUI
 import Combine

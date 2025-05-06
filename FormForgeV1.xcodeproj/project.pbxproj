@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FCDB7976F35CBA4D9466768C /* Pods_FormForgeV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB7ECC9B5121785019D82B05 /* Pods_FormForgeV1.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		2D44F79C3EF852A97285C3F7 /* Pods-FormForgeV1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FormForgeV1.release.xcconfig"; path = "Target Support Files/Pods-FormForgeV1/Pods-FormForgeV1.release.xcconfig"; sourceTree = "<group>"; };
 		8F8449AE2DC9F77700D894D9 /* FormForgeV1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FormForgeV1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D729827D2F38D4D2416C56B5 /* Pods-FormForgeV1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FormForgeV1.debug.xcconfig"; path = "Target Support Files/Pods-FormForgeV1/Pods-FormForgeV1.debug.xcconfig"; sourceTree = "<group>"; };
+		FB7ECC9B5121785019D82B05 /* Pods_FormForgeV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FormForgeV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -23,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCDB7976F35CBA4D9466768C /* Pods_FormForgeV1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -34,6 +42,8 @@
 			children = (
 				8F8449B02DC9F77700D894D9 /* FormForgeV1 */,
 				8F8449AF2DC9F77700D894D9 /* Products */,
+				E8DDB3BCF5BCB2D56624D7B3 /* Pods */,
+				CC380A65C043FB3EB413565F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -45,6 +55,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CC380A65C043FB3EB413565F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB7ECC9B5121785019D82B05 /* Pods_FormForgeV1.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E8DDB3BCF5BCB2D56624D7B3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D729827D2F38D4D2416C56B5 /* Pods-FormForgeV1.debug.xcconfig */,
+				2D44F79C3EF852A97285C3F7 /* Pods-FormForgeV1.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -52,6 +79,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F8449BC2DC9F77800D894D9 /* Build configuration list for PBXNativeTarget "FormForgeV1" */;
 			buildPhases = (
+				DAC893DD0EA095D2FB51E8FE /* [CP] Check Pods Manifest.lock */,
 				8F8449AA2DC9F77700D894D9 /* Sources */,
 				8F8449AB2DC9F77700D894D9 /* Frameworks */,
 				8F8449AC2DC9F77700D894D9 /* Resources */,
@@ -64,8 +92,6 @@
 				8F8449B02DC9F77700D894D9 /* FormForgeV1 */,
 			);
 			name = FormForgeV1;
-			packageProductDependencies = (
-			);
 			productName = FormForgeV1;
 			productReference = 8F8449AE2DC9F77700D894D9 /* FormForgeV1.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +139,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DAC893DD0EA095D2FB51E8FE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FormForgeV1-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8F8449AA2DC9F77700D894D9 /* Sources */ = {
@@ -246,6 +297,7 @@
 		};
 		8F8449BD2DC9F77800D894D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D729827D2F38D4D2416C56B5 /* Pods-FormForgeV1.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -255,6 +307,8 @@
 				DEVELOPMENT_TEAM = 8T43S264Q5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs camera access to detect body poses.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs photo library access to detect poses in your images and videos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -275,6 +329,7 @@
 		};
 		8F8449BE2DC9F77800D894D9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D44F79C3EF852A97285C3F7 /* Pods-FormForgeV1.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -284,6 +339,8 @@
 				DEVELOPMENT_TEAM = 8T43S264Q5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs camera access to detect body poses.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs photo library access to detect poses in your images and videos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

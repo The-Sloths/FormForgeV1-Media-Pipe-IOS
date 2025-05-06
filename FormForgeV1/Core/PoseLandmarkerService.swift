@@ -1,10 +1,18 @@
+//
+//  PoseLandmarkerService.swift
+//  FormForgeV1
+//
+//  Created by Pawel Kowalewski on 06/05/2025.
+//
+
+
 import Foundation
 import MediaPipeTasksVision
 import Combine
 import UIKit
 import AVFoundation
 
-class PoseLandmarkerService: ObservableObject {
+class PoseLandmarkerService: NSObject, ObservableObject {
     enum LandmarkerError: Error {
         case failedToCreateLandmarker
         case failedToDetect
@@ -27,6 +35,8 @@ class PoseLandmarkerService: ObservableObject {
         delegate: Delegate = .CPU
     ) {
         self.runningMode = runningMode
+        super.init()  // Call super.init() before using self
+        
         createPoseLandmarker(
             modelPath: modelPath,
             runningMode: runningMode,

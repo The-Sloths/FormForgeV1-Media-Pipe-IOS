@@ -1,3 +1,11 @@
+//
+//  MediaLibraryView.swift
+//  FormForgeV1
+//
+//  Created by Pawel Kowalewski on 06/05/2025.
+//
+
+
 import SwiftUI
 import PhotosUI
 import AVKit
@@ -100,7 +108,7 @@ struct MediaLibraryView: View {
             // Bottom settings panel
             VStack {
                 Spacer()
-                SettingsPanelView()
+                SettingsPanelView(poseLandmarkerService: poseLandmarkerService)
                     .padding()
                     .background(Color.black.opacity(0.7))
                     .cornerRadius(10)

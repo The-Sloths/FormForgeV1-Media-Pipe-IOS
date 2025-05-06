@@ -1,8 +1,17 @@
+//
+//  SettingsPanelView.swift
+//  FormForgeV1
+//
+//  Created by Pawel Kowalewski on 06/05/2025.
+//
+
+
 import SwiftUI
 import MediaPipeTasksVision
 
 struct SettingsPanelView: View {
     @ObservedObject var inferenceConfig = InferenceConfig.shared
+    @ObservedObject var poseLandmarkerService: PoseLandmarkerService
     @State private var isExpanded = false
     
     var body: some View {
@@ -26,7 +35,7 @@ struct SettingsPanelView: View {
             
             if isExpanded {
                 // Inference time
-                if let resultBundle = PoseLandmarkerService().resultBundle {
+                if let resultBundle = poseLandmarkerService.resultBundle {
                     HStack {
                         Text("Inference Time:")
                             .foregroundColor(.white)

@@ -67,7 +67,7 @@ struct CameraView: View {
             // Settings panel at the bottom
             VStack {
                 Spacer()
-                SettingsPanelView()
+                SettingsPanelView(poseLandmarkerService: poseLandmarkerService)
                     .padding()
                     .background(Color.black.opacity(0.7))
                     .cornerRadius(10)
@@ -92,8 +92,8 @@ struct CameraView: View {
             updateOverlaysForCurrentOrientation()
         }
         .onChange(of: cameraManager.frame) { frame in
-            if let frame = frame,
-               let uiImage = UIImage(cgImage: frame) {
+            if let frame = frame {
+                let uiImage = UIImage(cgImage: frame)  // This is not optional
                 processFrame(uiImage)
             }
         }
