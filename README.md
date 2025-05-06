@@ -23,8 +23,8 @@ An iOS SwiftUI application that implements real-time body pose landmark detectio
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-cd YOUR_REPOSITORY
+git clone https://github.com/The-Sloths/FormForgeV1-Media-Pipe-IOS
+cd FormForgeV1-Media-Pipe-IOS
 ```
 
 ### Install Dependencies
