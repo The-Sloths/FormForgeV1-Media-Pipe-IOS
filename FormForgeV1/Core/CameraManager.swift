@@ -21,11 +21,26 @@ class CameraManager: NSObject, ObservableObject {
     @Published var error: CameraError?
     @Published var frame: CGImage?
     @Published var status = Status.unconfigured
+    @Published var cameraPosition: AVCaptureDevice.Position = .front
     
     private let cameraQueue = DispatchQueue(label: "com.yourapp.cameraqueue")
     private var captureSession: AVCaptureSession?
     private var videoOutput = AVCaptureVideoDataOutput()
     private var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    
+    func switchCamera() {
+            // Stop current session
+            self.stop()
+            
+            // Toggle camera position
+            cameraPosition = cameraPosition == .back ? .front : .back
+            
+            // Reconfigure and restart
+            DispatchQueue.main.async {
+                self.configureSession()
+            }
+        }
+        
     
     var videoOrientation: AVCaptureVideoOrientation {
         switch UIDevice.current.orientation {
@@ -94,8 +109,22 @@ class CameraManager: NSObject, ObservableObject {
         cameraQueue.async { [weak self] in
             guard let self = self else { return }
             
+            // Create a new session
             self.captureSession = AVCaptureSession()
             self.captureSession?.beginConfiguration()
+            
+            // Remove any existing inputs and outputs
+            if let inputs = self.captureSession?.inputs as? [AVCaptureInput] {
+                for input in inputs {
+                    self.captureSession?.removeInput(input)
+                }
+            }
+            
+            if let outputs = self.captureSession?.outputs as? [AVCaptureOutput] {
+                for output in outputs {
+                    self.captureSession?.removeOutput(output)
+                }
+            }
             
             guard self.addVideoDeviceInput() else {
                 self.status = .failed
@@ -118,23 +147,24 @@ class CameraManager: NSObject, ObservableObject {
     }
     
     private func addVideoDeviceInput() -> Bool {
-        guard let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
-            return false
-        }
-        
-        do {
-            let videoDeviceInput = try AVCaptureDeviceInput(device: camera)
-            if captureSession?.canAddInput(videoDeviceInput) == true {
-                captureSession?.addInput(videoDeviceInput)
-                return true
-            } else {
+            // Use the current cameraPosition instead of hardcoding .back
+            guard let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: cameraPosition) else {
                 return false
             }
-        } catch {
-            self.error = .cannotAddInput
-            return false
+            
+            do {
+                let videoDeviceInput = try AVCaptureDeviceInput(device: camera)
+                if captureSession?.canAddInput(videoDeviceInput) == true {
+                    captureSession?.addInput(videoDeviceInput)
+                    return true
+                } else {
+                    return false
+                }
+            } catch {
+                self.error = .cannotAddInput
+                return false
+            }
         }
-    }
     
     private func addVideoDataOutput() -> Bool {
         videoOutput.setSampleBufferDelegate(self, queue: cameraQueue)
@@ -144,6 +174,14 @@ class CameraManager: NSObject, ObservableObject {
         if captureSession?.canAddOutput(videoOutput) == true {
             captureSession?.addOutput(videoOutput)
             videoOutput.connection(with: .video)?.videoOrientation = .portrait
+            
+            // Add mirroring for front camera
+            if cameraPosition == .front {
+                videoOutput.connection(with: .video)?.isVideoMirrored = true
+            } else {
+                videoOutput.connection(with: .video)?.isVideoMirrored = false
+            }
+            
             return true
         } else {
             return false

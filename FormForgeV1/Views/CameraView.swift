@@ -56,6 +56,25 @@ struct CameraView: View {
                             )
                         )
                 }
+                
+                VStack {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            cameraManager.switchCamera()
+                        }) {
+                            Image(systemName: "camera.rotate")
+                                .font(.system(size: 24))
+                                .foregroundColor(.white)
+                                .padding(10)
+                                .background(Color.black.opacity(0.6))
+                                .clipShape(Circle())
+                        }
+                        .padding(.trailing, 20)
+                        .padding(.top, 40)
+                    }
+                    Spacer()
+                }
             } else {
                 Color.black
                     .overlay(
@@ -106,7 +125,7 @@ struct CameraView: View {
         if let cgImage = image.cgImage {
             let ciImage = CIImage(cgImage: cgImage)
             let context = CIContext()
-            let pixelBuffer = context.createPixelBuffer(from: ciImage) 
+            let pixelBuffer = context.createPixelBuffer(from: ciImage)
             
             if let pixelBuffer = pixelBuffer {
                 poseLandmarkerService.detectAsync(pixelBuffer: pixelBuffer, orientation: orientation)
