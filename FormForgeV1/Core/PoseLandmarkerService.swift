@@ -199,24 +199,44 @@ struct ResultBundle {
 }
 
 enum PoseLandmarkerHelper {
-    enum Landmark: Int {
-        case nose = 0
-        case leftEye = 1
-        case rightEye = 2
-        case leftEar = 3
-        case rightEar = 4
-        case leftShoulder = 5
-        case rightShoulder = 6
-        case leftElbow = 7
-        case rightElbow = 8
-        case leftWrist = 9
-        case rightWrist = 10
-        case leftHip = 11
-        case rightHip = 12
-        case leftKnee = 13
-        case rightKnee = 14
-        case leftAnkle = 15
-        case rightAnkle = 16
+    enum Landmark: Int, CaseIterable {
+            case nose = 0
+            case leftEyeInner = 1
+            case leftEye = 2
+            case leftEyeOuter = 3
+            case rightEyeInner = 4
+            case rightEye = 5
+            case rightEyeOuter = 6
+            case leftEar = 7
+            case rightEar = 8
+            case mouthLeft = 9
+            case mouthRight = 10
+            case leftShoulder = 11
+            case rightShoulder = 12
+            case leftElbow = 13
+            case rightElbow = 14
+            case leftWrist = 15
+            case rightWrist = 16
+            case leftPinky = 17 // Often named leftPinkyFingerMCP or similar
+            case rightPinky = 18// Often named rightPinkyFingerMCP or similar
+            case leftIndex = 19 // Often named leftIndexFingerMCP or similar
+            case rightIndex = 20// Often named rightIndexFingerMCP or similar
+            case leftThumb = 21 // Often named leftThumbMCP or similar
+            case rightThumb = 22// Often named rightThumbMCP or similar
+            case leftHip = 23
+            case rightHip = 24
+            case leftKnee = 25
+            case rightKnee = 26
+            case leftAnkle = 27
+            case rightAnkle = 28
+            case leftHeel = 29
+            case rightHeel = 30
+            case leftFootIndex = 31 // Tip of the foot
+            case rightFootIndex = 32// Tip of the foot
+
+            var stringValue: String {
+                return "\(self)"
+            }
     }
     
     // Calculate angle between three points
