@@ -24,13 +24,8 @@ struct ExerciseSelectionView: View {
                     presentationMode.wrappedValue.dismiss()
                 }
                 
-                Button("Jumping Jacks - 20 reps") {
-                    exerciseTracker.startExercise(JumpingJackExercise(targetReps: 20))
-                    presentationMode.wrappedValue.dismiss()
-                }
-                
-                Button("Wall Slides - 10 reps") {
-                    exerciseTracker.startExercise(WallSlideExercise(targetReps: 10))
+                Button("Plank") {
+                    exerciseTracker.startExercise(PlankExercise(targetDurationSeconds: 30, plankType: .forearm))
                     presentationMode.wrappedValue.dismiss()
                 }
             }
