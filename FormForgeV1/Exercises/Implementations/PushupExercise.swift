@@ -23,7 +23,7 @@ class PushupExercise: Exercise {
     let referenceVideo: URL?
 
     // Tunable parameters for detection
-    private let minKeypointScore: Float = 0.4 // Can be slightly lower for push-ups if hands/wrists are sometimes less clear
+    private let minKeypointScore: Float = 0.2 // Can be slightly lower for push-ups if hands/wrists are sometimes less clear
     private var isInDownState = false          // Tracks if the user is currently considered to be in the "down" phase
     private var downStateFrameCount = 0        // Frames user has been in the current down position
     private var upStateFrameCount = 0          // Frames user has been in the current up position

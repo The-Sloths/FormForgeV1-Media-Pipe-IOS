@@ -49,7 +49,7 @@ class SquatExercise: Exercise {
     let referenceVideo: URL?
 
     // Tunable parameters for detection
-    private let minKeypointScore: Float = 0.5  // Minimum confidence score for a landmark to be considered visible
+    private let minKeypointScore: Float = 0.2 // Minimum confidence score for a landmark to be considered visible
     private var isInSquatState = false         // Tracks if the user is currently considered to be in the "down" phase of a squat
     private var squatStateFrameCount = 0       // Frames user has been in the current squat position (down)
     private var standingStateFrameCount = 0    // Frames user has been in the current standing position (up)

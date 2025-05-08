@@ -43,7 +43,7 @@ class PlankExercise: TimedExercise { // Conform to the new or modified protocol
     private let plankType: PlankType
 
     // Tunable parameters
-    private let minKeypointScore: Float = 0.45
+    private let minKeypointScore: Float = 0.25
     private var isActivelyHoldingPlank = false // True if user is currently in correct plank pose for consecutive frames
     private var poseConfirmationFrameCount = 0
     private let requiredFramesToConfirmPose = 5 // Frames to confirm entering/exiting plank
